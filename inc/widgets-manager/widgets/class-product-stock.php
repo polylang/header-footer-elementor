@@ -96,11 +96,17 @@ class Product_Stock extends Widget_Base {
 		$this->register_style_controls();
 	}
 
+	/**
+	 * Registers general controls for stock status.
+	 *
+	 * @since x.x.x
+	 * @access protected
+	 */
 	function register_general_content_controls(){
 		$this->start_controls_section(
 			'section_general_fields',
 			[
-				'label' => __( 'Title', 'header-footer-elementor' ),
+				'label' => __( 'Stock Status', 'header-footer-elementor' ),
 			]
 		);
 
@@ -161,6 +167,12 @@ class Product_Stock extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Registers styling controls for stock status.
+	 *
+	 * @since x.x.x
+	 * @access protected
+	 */
 	function register_style_controls() {
 
 		$this->start_controls_section(
@@ -214,7 +226,18 @@ class Product_Stock extends Widget_Base {
 
 		$this->end_controls_section();
 	}
+
+	/**
+	 * Render the widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since x.x.x
+	 *
+	 * @access protected
+	 */
 	function render(){
+
 		global $product;
 
 		if ( empty( $product ) || ! $product->is_visible() ) {
