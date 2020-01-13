@@ -102,7 +102,7 @@ class Product_Stock extends Widget_Base {
 	 * @since x.x.x
 	 * @access protected
 	 */
-	function register_general_content_controls(){
+	function register_general_content_controls() {
 		$this->start_controls_section(
 			'section_general_fields',
 			[
@@ -113,11 +113,11 @@ class Product_Stock extends Widget_Base {
 		$this->add_control(
 			'custom_text',
 			[
-				'label'     => __( 'Custom Stock Text', 'header-footer-elementor' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'header-footer-elementor' ),
-				'label_off' => __( 'Hide', 'header-footer-elementor' ),
-				'default'   => 'no',
+				'label'        => __( 'Custom Stock Text', 'header-footer-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'header-footer-elementor' ),
+				'label_off'    => __( 'Hide', 'header-footer-elementor' ),
+				'default'      => 'no',
 				'return_value' => 'yes',
 			]
 		);
@@ -125,42 +125,42 @@ class Product_Stock extends Widget_Base {
 		$this->add_control(
 			'custom_stock',
 			[
-				'label'   => __( 'Stock Text', 'header-footer-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => [
+				'label'     => __( 'Stock Text', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [
 					'active' => true,
 				],
 				'condition' => [
-					'custom_text' => 'yes'
-				]
+					'custom_text' => 'yes',
+				],
 			]
 		);
 
 		$this->add_control(
 			'custom_out_of_stock',
 			[
-				'label'   => __( 'Out Of Stock Text', 'header-footer-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => [
+				'label'     => __( 'Out Of Stock Text', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [
 					'active' => true,
 				],
 				'condition' => [
-					'custom_text' => 'yes'
-				]
+					'custom_text' => 'yes',
+				],
 			]
 		);
 
 		$this->add_control(
 			'custom_on_backorder',
 			[
-				'label'   => __( 'On Backorder Text', 'header-footer-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => [
+				'label'     => __( 'On Backorder Text', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::TEXT,
+				'dynamic'   => [
 					'active' => true,
 				],
 				'condition' => [
-					'custom_text' => 'yes'
-				]
+					'custom_text' => 'yes',
+				],
 			]
 		);
 
@@ -179,24 +179,24 @@ class Product_Stock extends Widget_Base {
 			'section_product_stock_style',
 			[
 				'label' => __( 'Style', 'header-footer-elementor' ),
-				'tab' => Controls_Manager::TAB_STYLE,
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
 			'Color_heading',
-			array(
+			[
 				'label'     => __( 'Color', 'uael' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
-			)
+			]
 		);
 
 		$this->add_control(
 			'instock_text_color',
 			[
-				'label' => __( 'Stock/On Backorder Color', 'header-footer-elementor' ),
-				'type' => Controls_Manager::COLOR,
+				'label'     => __( 'Stock/On Backorder Color', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .hfe-product-stock .stock' => 'color: {{VALUE}}',
 				],
@@ -206,8 +206,8 @@ class Product_Stock extends Widget_Base {
 		$this->add_control(
 			'outofstock_text_color',
 			[
-				'label' => __( 'Out Of Stock Color', 'header-footer-elementor' ),
-				'type' => Controls_Manager::COLOR,
+				'label'     => __( 'Out Of Stock Color', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .hfe-product-stock .out-of-stock' => 'color: {{VALUE}}',
 				],
@@ -217,12 +217,11 @@ class Product_Stock extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'text_typography',
-				'label' => __( 'Typography', 'header-footer-elementor' ),
+				'name'     => 'text_typography',
+				'label'    => __( 'Typography', 'header-footer-elementor' ),
 				'selector' => '{{WRAPPER}} .hfe-product-stock',
 			]
 		);
-
 
 		$this->end_controls_section();
 	}
@@ -236,7 +235,7 @@ class Product_Stock extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	function render(){
+	function render() {
 
 		global $product;
 
@@ -248,47 +247,56 @@ class Product_Stock extends Widget_Base {
 		$post_id      = $product->get_id();
 		$stock_status = get_post_meta( $post_id, '_stock_status', true );
 
-  		 ?>
-  		 <div class="hfe-product-stock">
-  		 	<?php if( 'instock' === $stock_status ){
-  		 		$stock_status_str_one = ucfirst( substr( $stock_status, 0, 2 ) );
-  		 		$stock_status_str_two = substr($stock_status, 2, strlen( $stock_status ) );
-  		 		?>
-  		 		<div class="hfe-in-stock stock">
-  		 			<?php if( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ){
-  		 				echo $settings['custom_stock']; 
-  		 			} else {
-  		 				echo $stock_status_str_one . ' ' . $stock_status_str_two;
-  		 			} ?>
-  		 		</div>
-  		 	<?php } ?> 
-  		 	<?php if( 'outofstock' === $stock_status ){
-  		 		$stock_status_str_one   = ucfirst( substr( $stock_status, 0, 3 ) );
-  		 		$stock_status_str_two   = substr( $stock_status, 3, 2 );
-  		 		$stock_status_str_three = substr( $stock_status, 5, 5 );
-  		 		?>
-  		 		<div class="hfe-out-of-stock out-of-stock">
-  		 			<?php if( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ){
-  		 				echo $settings['custom_out_of_stock'];
-  		 			} else {
-  		 				
-  		 				echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three; 
-  		 			} ?>
-  		 		</div>
-  		 	<?php } ?> 
-  		 	<?php if( 'onbackorder' === $stock_status ){
-  		 		$stock_status_str_one = 'Available on backorder';
-  		 		?>
-  		 		<div class="hfe-on-backorder stock">
-  		 			<?php echo $stock_status_str_one; ?>
-  		 			<?php if( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ){
-  		 				echo $settings['custom_on_backorder'];
-  		 			} else {
-  		 				echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three;
-  		 			} ?>
-  		 		</div>
-  		 	<?php } ?> 		 	
-  		</div>
-  		<?php
+		?>
+		<div class="hfe-product-stock">
+			<?php
+			if ( 'instock' === $stock_status ) {
+				$stock_status_str_one = ucfirst( substr( $stock_status, 0, 2 ) );
+				$stock_status_str_two = substr( $stock_status, 2, strlen( $stock_status ) );
+				?>
+					<div class="hfe-in-stock stock">
+						<?php
+						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
+							echo $settings['custom_stock'];
+						} else {
+							echo $stock_status_str_one . ' ' . $stock_status_str_two;
+						}
+						?>
+					</div>
+			<?php } ?> 
+			<?php
+			if ( 'outofstock' === $stock_status ) {
+				$stock_status_str_one   = ucfirst( substr( $stock_status, 0, 3 ) );
+				$stock_status_str_two   = substr( $stock_status, 3, 2 );
+				$stock_status_str_three = substr( $stock_status, 5, 5 );
+				?>
+					<div class="hfe-out-of-stock out-of-stock">
+						<?php
+						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
+							echo $settings['custom_out_of_stock'];
+						} else {
+
+							echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three;
+						}
+						?>
+					</div>
+			<?php } ?> 
+			<?php
+			if ( 'onbackorder' === $stock_status ) {
+				$stock_status_str_one = 'Available on backorder';
+				?>
+					<div class="hfe-on-backorder stock">
+						<?php echo $stock_status_str_one; ?>
+						<?php
+						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
+							echo $settings['custom_on_backorder'];
+						} else {
+							echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three;
+						}
+						?>
+					</div>
+			<?php } ?> 		 	
+		</div>
+		<?php
 	}
 }
