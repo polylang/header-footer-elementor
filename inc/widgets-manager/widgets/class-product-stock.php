@@ -257,9 +257,9 @@ class Product_Stock extends Widget_Base {
 					<div class="hfe-in-stock stock">
 						<?php
 						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
-							echo $settings['custom_stock'];
+							echo wp_kses_post( $settings['custom_stock'] );
 						} else {
-							echo $stock_status_str_one . ' ' . $stock_status_str_two;
+							echo esc_attr( $stock_status_str_one ) . ' ' . esc_attr( $stock_status_str_two );
 						}
 						?>
 					</div>
@@ -273,10 +273,10 @@ class Product_Stock extends Widget_Base {
 					<div class="hfe-out-of-stock out-of-stock">
 						<?php
 						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
-							echo $settings['custom_out_of_stock'];
+							echo wp_kses_post( $settings['custom_out_of_stock'] );
 						} else {
 
-							echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three;
+							echo esc_attr( $stock_status_str_one ) . ' ' . esc_attr( $stock_status_str_two ) . ' ' . esc_attr( $stock_status_str_three );
 						}
 						?>
 					</div>
@@ -286,12 +286,12 @@ class Product_Stock extends Widget_Base {
 				$stock_status_str_one = 'Available on backorder';
 				?>
 					<div class="hfe-on-backorder stock">
-						<?php echo $stock_status_str_one; ?>
+						<?php echo wp_kses_post( $stock_status_str_one ); ?>
 						<?php
 						if ( 'yes' === $settings['custom_text'] && '' !== $settings['custom_stock'] ) {
 							echo $settings['custom_on_backorder'];
 						} else {
-							echo $stock_status_str_one . ' ' . $stock_status_str_two . ' ' . $stock_status_str_three;
+							echo esc_attr( $stock_status_str_one ) . ' ' . esc_attr( $stock_status_str_two ) . ' ' . esc_attr( $stock_status_str_three );
 						}
 						?>
 					</div>
