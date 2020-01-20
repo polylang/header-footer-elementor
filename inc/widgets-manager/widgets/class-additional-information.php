@@ -204,9 +204,10 @@ class Additional_Information extends Widget_Base {
 	 */
 	public function render_additional_information() {
 		global $product;
+		$additional_information = '';
 		if ( is_product() ) {
 			$product                = wc_get_product( get_the_ID() );
-			$additional_information = $product->list_attributes();
+			$additional_information = wc_display_product_attributes( $product );
 		}
 		return $additional_information;
 	}
@@ -221,12 +222,12 @@ class Additional_Information extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		global $product;
-		$product = wc_get_product();
 		$heading = apply_filters( 'woocommerce_product_additional_information_heading', __( 'Additional information', 'header-footer-elementor' ) );
-		$this->add_render_attribute( 'hfe_additional_heading', 'class', 'hfe-additional-heading' );
 		$this->add_render_attribute( 'hfe_additional_heading_tag', 'class', 'hfe-additional-heading-tag' );
-		if ( $heading ) : ?>
-			<<?php echo $settings['heading_tag']; ?> <?php echo $this->get_render_attribute_string( 'hfe_additional_heading_tag' ); ?>><?php echo esc_html( $heading ); ?></h2>
+		$this->add_render_attribute( 'hfe_additional_heading', 'class', 'hfe-additional-heading' );
+		?>
+		<?php if ( $heading ) : ?>
+			<<?php echo $settings['heading_tag']; ?> <?php echo $this->get_render_attribute_string( 'hfe_additional_heading_tag' ); ?>><?php echo $heading; ?></h2>
 		<?php endif; ?>
 		<div <?php echo $this->get_render_attribute_string( 'hfe_additional_heading' ); ?>>
 			<?php echo $this->render_additional_information(); ?>
