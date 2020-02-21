@@ -6,6 +6,7 @@
  */
 namespace HFE\WidgetsManager\Widgets;
 
+
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
@@ -13,6 +14,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Scheme_Color;
 use Elementor\Widget_Button;
+
 use Elementor\Group_Control_Background;
 
 use Elementor\Widget_Base;
@@ -26,6 +28,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Add_To_Cart extends Widget_Base {
 
+	/**
+	 * Module should load or not.
+	 *
+	 * @since 0.0.1
+	 * @access public
+	 *
+	 * @return bool true|false.
+	 */
+	/*public static function is_enable() {
+		if( ! class_exists( 'woocommerce' ) ){
+			return false;
+		} 
+	}*/
 	/**
 	 * Retrieve the widget name.
 	 *
@@ -164,7 +179,7 @@ class Add_To_Cart extends Widget_Base {
 		);
 
 		$this->add_control(
-			'size',
+			'btn_size',
 			array(
 				'label' => __( 'Size', 'header-footer-elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -263,7 +278,7 @@ class Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'button_color',
 			array(
-				'label'     => __( 'Text Color', 'uael' ),
+				'label'     => __( 'Text Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .uael-button' => 'color: {{VALUE}};',
@@ -275,7 +290,7 @@ class Add_To_Cart extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'           => 'button_background_color',
-				'label'          => __( 'Background Color', 'uael' ),
+				'label'          => __( 'Background Color', 'header-footer-elementor' ),
 				'types'          => array( 'classic', 'gradient' ),
 				'selector'       => '{{WRAPPER}} .uael-button',
 				'fields_options' => array(
@@ -302,7 +317,7 @@ class Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'uael' ),
+				'label'      => __( 'Border Radius', 'header-footer-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -324,67 +339,125 @@ class Add_To_Cart extends Widget_Base {
 		$this->start_controls_tab(
 			'button_hover',
 			array(
-				'label' => __( 'Hover', 'uael' ),
+				'label' => __( 'Hover', 'header-footer-elementor' ),
 			)
 		);
 
 
 		$this->add_control(
-					'button_hover_color',
-					array(
-						'label'     => __( 'Text Hover Color', 'uael' ),
-						'type'      => Controls_Manager::COLOR,
-						'selectors' => array(
-							'{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover' => 'color: {{VALUE}};',
-						),
-					)
-				);
+			'button_hover_color',
+			array(
+				'label'     => __( 'Text Hover Color', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover' => 'color: {{VALUE}};',
+				),
+			)
+		);
 
 		$this->add_group_control(
-					Group_Control_Background::get_type(),
-					array(
-						'name'           => 'button_background_hover_color',
-						'label'          => __( 'Background Color', 'uael' ),
-						'types'          => array( 'classic', 'gradient' ),
-						'selector'       => '{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover',
-						'fields_options' => array(
-							'color' => array(
-								'scheme' => array(
-									'type'  => Scheme_Color::get_type(),
-									'value' => Scheme_Color::COLOR_4,
-								),
-							),
-						),
-					)
-				);
-
-		$this->add_control(
-					'button_border_hover_color',
-					array(
-						'label'     => __( 'Border Hover Color', 'uael' ),
-						'type'      => Controls_Manager::COLOR,
-						'scheme'    => array(
+			Group_Control_Background::get_type(),
+			array(
+				'name'           => 'button_background_hover_color',
+				'label'          => __( 'Background Color', 'header-footer-elementor' ),
+				'types'          => array( 'classic', 'gradient' ),
+				'selector'       => '{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover',
+				'fields_options' => array(
+					'color' => array(
+						'scheme' => array(
 							'type'  => Scheme_Color::get_type(),
 							'value' => Scheme_Color::COLOR_4,
 						),
-						'condition' => array(
-							'button_border_border!' => '',
-						),
-						'selectors' => array(
-							'{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover' => 'border-color: {{VALUE}};',
-						),
-					)
-				);
+					),
+				),
+			)
+		);
 
 		$this->add_control(
-					'hover_animation',
-					array(
-						'label' => __( 'Hover Animation', 'uael' ),
-						'type'  => Controls_Manager::HOVER_ANIMATION,
-					)
-				);
+			'button_border_hover_color',
+			array(
+				'label'     => __( 'Border Hover Color', 'uael' ),
+				'type'      => Controls_Manager::COLOR,
+				'scheme'    => array(
+					'type'  => Scheme_Color::get_type(),
+					'value' => Scheme_Color::COLOR_4,
+				),
+				'condition' => array(
+					'button_border_border!' => '',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .uael-button:focus, {{WRAPPER}} .uael-button:hover' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'hover_animation',
+			array(
+				'label' => __( 'Hover Animation', 'uael' ),
+				'type'  => Controls_Manager::HOVER_ANIMATION,
+			)
+		);
 
 		$this->end_controls_tab();
+
+	}
+	/**
+	 * Render Woo Product Grid output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since x.x.x
+	 * @access protected
+	 */
+	protected function render() {
+
+		$settings = $this->get_settings_for_display();
+		$node_id  = $this->get_id();
+		$atc_html = '';
+		$product  = false;
+
+		$class = array(
+				'uael-button',
+				'elementor-button',
+				'elementor-animation-' . $settings['hover_animation'],
+				'elementor-size-' . $settings['btn_size'],
+			);
+
+		$this->add_render_attribute(
+			'button',
+			array(
+				'rel'             => 'nofollow',
+				// 'href'            => $product->add_to_cart_url(),
+				'class'           => $class,
+			)
+		);
+
+
+		$this->add_render_attribute(
+			'icon-align',
+			'class',
+			array(
+				'uael-atc-icon-align',
+				'elementor-align-icon-' . $settings['btn_icon_align'],
+			)
+		);
+
+		$atc_html .= '<div class="uael-woo-add-to-cart">';
+		$atc_html .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>';
+		$atc_html .= '<span class="uael-atc-content-wrapper">';
+
+		$atc_html .= '<span ' . $this->get_render_attribute_string( 'icon-align' ) . '">';
+		$atc_html .=  '<i class="' . $settings['new_btn_icon']['value'] . '" aria-hidden="true"></i>';
+		$atc_html .= '</span>';
+
+
+		$atc_html .= '<span class="uael-atc-btn-text">' . $settings['btn_text'] . '</span>';
+		$atc_html .= '</span>';
+		$atc_html .= '</a>';
+		$atc_html .= '</div>';
+
+		echo $atc_html; 
 
 	}
 
