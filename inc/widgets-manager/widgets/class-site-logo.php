@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * HFE widget for Site Logo.
  *
- * @since x.x.x
+ * @since 1.3.0
  */
 class Site_Logo extends Widget_Base {
 
@@ -39,7 +39,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Retrieve the widget name.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 *
 	 * @access public
 	 *
@@ -52,7 +52,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Retrieve the widget title.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 *
 	 * @access public
 	 *
@@ -65,7 +65,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Retrieve the widget icon.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 *
 	 * @access public
 	 *
@@ -83,7 +83,7 @@ class Site_Logo extends Widget_Base {
 	 * Note that currently Elementor supports only one category.
 	 * When multiple categories passed, Elementor uses the first one.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 *
 	 * @access public
 	 *
@@ -96,7 +96,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Register Site Logo controls.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access protected
 	 */
 	protected function _register_controls() {
@@ -108,7 +108,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Register Site Logo General Controls.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access protected
 	 */
 	protected function register_content_site_logo_controls() {
@@ -122,10 +122,10 @@ class Site_Logo extends Widget_Base {
 		$this->add_control(
 			'site_logo_fallback',
 			[
-				'label'       => __( 'Add Fallback', 'header-footer-elementor' ),
+				'label'       => __( 'Custom Image', 'header-footer-elementor' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'yes'         => __( 'Yes', 'uael' ),
-				'no'          => __( 'No', 'uael' ),
+				'yes'         => __( 'Yes', 'header-footer-elementor' ),
+				'no'          => __( 'No', 'header-footer-elementor' ),
 				'default'     => 'no',
 				'render_type' => 'template',
 			]
@@ -134,7 +134,7 @@ class Site_Logo extends Widget_Base {
 		$this->add_control(
 			'custom_image',
 			[
-				'label'     => __( 'Custom Image', 'header-footer-elementor' ),
+				'label'     => __( 'Add Image', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::MEDIA,
 				'dynamic'   => [
 					'active' => true,
@@ -201,7 +201,7 @@ class Site_Logo extends Widget_Base {
 				'label'       => __( 'Custom Caption', 'header-footer-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
-				'placeholder' => __( 'Enter your image caption', 'header-footer-elementor' ),
+				'placeholder' => __( 'Enter caption', 'header-footer-elementor' ),
 				'condition'   => [
 					'caption_source' => 'yes',
 				],
@@ -217,11 +217,12 @@ class Site_Logo extends Widget_Base {
 			[
 				'label'   => __( 'Link', 'header-footer-elementor' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'none',
+				'default' => 'default',
 				'options' => [
-					'none'   => __( 'None', 'header-footer-elementor' ),
-					'file'   => __( 'Media File', 'header-footer-elementor' ),
-					'custom' => __( 'Custom URL', 'header-footer-elementor' ),
+					'default' => __( 'Default', 'header-footer-elementor' ),
+					'none'    => __( 'None', 'header-footer-elementor' ),
+					'file'    => __( 'Media File', 'header-footer-elementor' ),
+					'custom'  => __( 'Custom URL', 'header-footer-elementor' ),
 				],
 			]
 		);
@@ -272,7 +273,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Register Site Image Style Controls.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access protected
 	 */
 	protected function register_site_logo_styling_controls() {
@@ -351,6 +352,17 @@ class Site_Logo extends Widget_Base {
 			[
 				'type'  => Controls_Manager::DIVIDER,
 				'style' => 'thick',
+			]
+		);
+
+		$this->add_control(
+			'site_logo_background_color',
+			[
+				'label'     => __( 'Background Color', 'header-footer-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .hfe-site-logo-set .hfe-site-logo-container' => 'background-color: {{VALUE}};',
+				],
 			]
 		);
 
@@ -539,7 +551,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Register Site Logo style Controls.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access protected
 	 */
 	protected function register_site_logo_caption_styling_controls() {
@@ -637,7 +649,7 @@ class Site_Logo extends Widget_Base {
 	 * Check if the current widget has caption
 	 *
 	 * @access private
-	 * @since x.x.x
+	 * @since 1.3.0
 	 *
 	 * @param array $settings returns settings.
 	 *
@@ -651,7 +663,7 @@ class Site_Logo extends Widget_Base {
 	 * Get the caption for current widget.
 	 *
 	 * @access private
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @param array $settings returns the caption.
 	 *
 	 * @return string
@@ -669,11 +681,11 @@ class Site_Logo extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @param array $size returns the size of an image.
 	 * @access public
 	 */
-	public function site_image_url( $size = 'post-thumbnail' ) {
+	public function site_image_url( $size ) {
 		$settings = $this->get_settings_for_display();
 		if ( ! empty( $settings['custom_image']['url'] ) ) {
 			$logo = wp_get_attachment_image_src( $settings['custom_image']['id'], $size, true );
@@ -688,7 +700,7 @@ class Site_Logo extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access protected
 	 */
 	protected function render() {
@@ -698,13 +710,22 @@ class Site_Logo extends Widget_Base {
 
 		$this->add_render_attribute( 'wrapper', 'class', 'hfe-site-logo' );
 
-		$size = $settings[ 'site_logo_size' . '_size' ];
+		$size = $settings['site_logo_size_size'];
 
 		$site_image = $this->site_image_url( $size );
+
+		if ( site_url() . '/wp-includes/images/media/default.png' === $site_image ) {
+			$site_image = site_url() . '/wp-content/plugins/elementor/assets/images/placeholder.png';
+		} else {
+			$site_image = $site_image;
+		}
 
 		if ( 'file' === $settings['link_to'] ) {
 				$link = $site_image;
 				$this->add_render_attribute( 'link', 'href', $link );
+		} elseif ( 'default' === $settings['link_to'] ) {
+			$link = site_url();
+			$this->add_render_attribute( 'link', 'href', $link );
 		} else {
 			$link = $this->get_link_url( $settings );
 			$this->add_render_attribute( 'link', 'href', $link['url'] );
@@ -745,7 +766,7 @@ class Site_Logo extends Widget_Base {
 		} else {
 			require_once ELEMENTOR_PATH . 'includes/libraries/bfi-thumb/bfi-thumb.php';
 
-			$image_dimension = $settings[ 'site_logo_size' . '_custom_dimension' ];
+			$image_dimension = $settings['site_logo_size_custom_dimension'];
 
 			$image_size = [
 				// Defaults sizes.
@@ -789,18 +810,18 @@ class Site_Logo extends Widget_Base {
 			$image_url = $image_data[0];
 		}
 
-		$class_animation = $site_image_class . $img_animation;
-
-		$image_unset = site_url() . '/wp-includes/images/media/default.png';
-
-		if ( $image_unset !== $image_url ) {
+		if ( site_url() . '/wp-includes/images/media/default.png' === $image_url ) {
+			$image_url = site_url() . '/wp-content/plugins/elementor/assets/images/placeholder.png';
+		} else {
 			$image_url = $image_url;
 		}
 
-		if ( strpos( $_SERVER['HTTP_USER_AGENT'], 'Chrome' ) !== false ) {
-			$date      = new \DateTime();
-			$timestam  = $date->getTimestamp();
-			$image_url = $image_url . '?' . $timestam;
+		$class_animation = $site_image_class . $img_animation;
+
+		$image_unset = site_url() . '/wp-content/plugins/elementor/assets/images/placeholder.png';
+
+		if ( $image_unset !== $image_url ) {
+			$image_url = $image_url;
 		}
 
 		?>
@@ -818,7 +839,7 @@ class Site_Logo extends Widget_Base {
 			?>
 			<?php if ( ! empty( $caption_text ) ) : ?>
 					<div class="hfe-caption-width"> 
-						<figcaption class="widget-image-caption wp-caption-text"><?php echo esc_attr( $caption_text ); ?></figcaption>
+						<figcaption class="widget-image-caption wp-caption-text"><?php echo wp_kses_post( $caption_text ); ?></figcaption>
 					</div>
 			<?php endif; ?>
 				</figure>
@@ -830,7 +851,7 @@ class Site_Logo extends Widget_Base {
 	/**
 	 * Retrieve Site Logo widget link URL.
 	 *
-	 * @since x.x.x
+	 * @since 1.3.0
 	 * @access private
 	 *
 	 * @param array $settings returns settings.
@@ -846,6 +867,13 @@ class Site_Logo extends Widget_Base {
 				return false;
 			}
 			return $settings['link'];
+		}
+
+		if ( 'default' === $settings['link_to'] ) {
+			if ( empty( $settings['link']['url'] ) ) {
+				return false;
+			}
+			return site_url();
 		}
 	}
 }

@@ -2,8 +2,7 @@
 
 ul.hfe-nav-menu,
 .hfe-nav-menu li,
-.hfe-nav-menu ol,
-ol.hfe-nav-menu {
+.hfe-nav-menu ul {
     list-style: none !important;
     margin: 0;
     padding: 0;
@@ -297,7 +296,7 @@ div.hfe-nav-menu,
 /* Icon CSS ends */
 
 .hfe-nav-menu-icon {
-    /*padding: 0.35em;*/
+    padding: 0.35em;
     border: 0 solid;
 }
 
@@ -1550,5 +1549,11 @@ div.hfe-nav-menu,
 
 .hfe-toggle-no .hfe-layout-expandible .hfe-nav-menu__toggle {
     display: none;
+}
+
+/* Icon common CSS */
+
+.hfe-icon {
+    display: inline-block;
 }
 
