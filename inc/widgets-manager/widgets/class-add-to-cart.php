@@ -406,6 +406,17 @@ class Add_To_Cart extends Widget_Base {
 		$this->end_controls_tab();
 
 	}
+
+	public function render_product(){
+		global $product;
+		$product = '';
+		if( is_product() ) {
+			// $product_id   = $product->get_id();
+			$product = wc_get_product();
+		}
+			return $product;
+	}
+
 	/**
 	 * Render Woo Product Grid output on the frontend.
 	 *
@@ -415,9 +426,8 @@ class Add_To_Cart extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-
+		
 		$settings = $this->get_settings_for_display();
-		$node_id  = $this->get_id();
 		$atc_html = '';
 		$product  = false;
 
@@ -432,7 +442,6 @@ class Add_To_Cart extends Widget_Base {
 			'button',
 			array(
 				'rel'             => 'nofollow',
-				// 'href'            => $product->add_to_cart_url(),
 				'class'           => $class,
 			)
 		);
@@ -447,7 +456,12 @@ class Add_To_Cart extends Widget_Base {
 			)
 		);
 
-		$atc_html .= '<div class="uael-woo-add-to-cart">';
+		// global $woocommerce;
+		// var_dump($this->render_product());
+			// $woocommerce->cart->add_to_cart($product_id);
+
+		$atc_html .= '<div class="uael-woo-add-to-cart uael-product-<?php echo esc_attr( $product ); ?>">';
+
 		$atc_html .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>';
 		$atc_html .= '<span class="hfe-atc-content-wrapper">';
 
