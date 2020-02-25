@@ -216,12 +216,12 @@ class Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'btn_icon_align',
 			array(
-				'label'      => __( 'Icon Position', 'uael' ),
+				'label'      => __( 'Icon Position', 'header-footer-elementor' ),
 				'type'       => Controls_Manager::SELECT,
 				'default'    => 'left',
 				'options'    => array(
-					'left'  => __( 'Before', 'uael' ),
-					'right' => __( 'After', 'uael' ),
+					'left'  => __( 'Before', 'header-footer-elementor' ),
+					'right' => __( 'After', 'header-footer-elementor' ),
 				),
 
 			)
@@ -230,7 +230,7 @@ class Add_To_Cart extends Widget_Base {
 		$this->add_control(
 			'btn_icon_indent',
 			array(
-				'label'      => __( 'Icon Spacing', 'uael' ),
+				'label'      => __( 'Icon Spacing', 'header-footer-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
 				'range'      => array(
 					'px' => array(
