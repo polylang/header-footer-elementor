@@ -195,7 +195,7 @@ class Add_To_Cart extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .cart button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -265,7 +265,7 @@ class Add_To_Cart extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'button_typography',
-				'selector' => '{{WRAPPER}} .hfe-button',
+				'selector' => '{{WRAPPER}} .cart button',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
 			)
 		);
@@ -285,7 +285,7 @@ class Add_To_Cart extends Widget_Base {
 				'label'     => __( 'Text Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .hfe-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .cart button ' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -296,7 +296,7 @@ class Add_To_Cart extends Widget_Base {
 				'name'           => 'button_background_color',
 				'label'          => __( 'Background Color', 'header-footer-elementor' ),
 				'types'          => array( 'classic', 'gradient' ),
-				'selector'       => '{{WRAPPER}} .hfe-button',
+				'selector'       => '{{WRAPPER}} .cart button',
 				'fields_options' => array(
 					'color' => array(
 						'scheme' => array(
@@ -314,7 +314,7 @@ class Add_To_Cart extends Widget_Base {
 				'name'        => 'button_border',
 				'placeholder' => '',
 				'default'     => '',
-				'selector'    => '{{WRAPPER}} .hfe-button',
+				'selector'    => '{{WRAPPER}} .cart button',
 			)
 		);
 
@@ -325,7 +325,7 @@ class Add_To_Cart extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .hfe-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .cart button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -334,7 +334,7 @@ class Add_To_Cart extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'button_box_shadow',
-				'selector' => '{{WRAPPER}} .hfe-button',
+				'selector' => '{{WRAPPER}} .cart button',
 			)
 		);
 
@@ -354,7 +354,7 @@ class Add_To_Cart extends Widget_Base {
 				'label'     => __( 'Text Hover Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .hfe-button:focus, {{WRAPPER}} .hfe-button:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -365,7 +365,7 @@ class Add_To_Cart extends Widget_Base {
 				'name'           => 'button_background_hover_color',
 				'label'          => __( 'Background Color', 'header-footer-elementor' ),
 				'types'          => array( 'classic', 'gradient' ),
-				'selector'       => '{{WRAPPER}} .hfe-button:focus, {{WRAPPER}} .hfe-button:hover',
+				'selector'       => '{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover',
 				'fields_options' => array(
 					'color' => array(
 						'scheme' => array(
@@ -390,7 +390,7 @@ class Add_To_Cart extends Widget_Base {
 					'button_border_border!' => '',
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .hfe-button:focus, {{WRAPPER}} .hfe-button:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover' => 'border-color: {{VALUE}};',
 				),
 			)
 		);
@@ -408,14 +408,16 @@ class Add_To_Cart extends Widget_Base {
 	}
 
 	public function render_product(){
-		global $product;
-		$product = '';
-		if( is_product() ) {
+		// global $product;
+		/*$product = '';
+		if( is_product() ) {*/
 			// $product_id   = $product->get_id();
-			$product = wc_get_product();
-		}
-			return $product;
+			// $product = wc_get_product();
+		/*}
+			return $product;*/
+			// var_dump($product);  
 	}
+
 
 	/**
 	 * Render Woo Product Grid output on the frontend.
@@ -427,25 +429,31 @@ class Add_To_Cart extends Widget_Base {
 	 */
 	protected function render() {
 		
+		global $product;
+		$product = wc_get_product();
+		
+		if ( empty( $product ) ) {
+			return;
+		}
+	
 		$settings = $this->get_settings_for_display();
 		$atc_html = '';
-		$product  = false;
+		// $product  = false;
 
-		$class = array(
-				'hfe-button',
+/*		$class = array(
+				'cart button',
 				'elementor-button',
 				'elementor-animation-' . $settings['hover_animation'],
 				'elementor-size-' . $settings['btn_size'],
 			);
-
+*/
 		$this->add_render_attribute(
 			'button',
 			array(
 				'rel'             => 'nofollow',
-				'class'           => $class,
+				// 'class'           => $class,
 			)
 		);
-
 
 		$this->add_render_attribute(
 			'icon-align',
@@ -455,13 +463,29 @@ class Add_To_Cart extends Widget_Base {
 				'elementor-align-icon-' . $settings['btn_icon_align'],
 			)
 		);
+		?>
 
-		// global $woocommerce;
-		// var_dump($this->render_product());
-			// $woocommerce->cart->add_to_cart($product_id);
+		<div class="hfe-woo-atc hfe-product-<?php echo esc_attr( wc_get_product()->get_type() ); ?>">
+			<?php woocommerce_template_single_add_to_cart(); ?>
+			<!-- <a <?php echo $this->get_render_attribute_string( 'button' ); ?>>
+				<span class="hfe-atc-content-wrapper">
+					<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
+						<i class="<?php echo $settings['new_btn_icon']['value'] ?>" aria-hidden="true"></i>
+					</span>
+					<span class="uael-atc-btn-text"><?php echo $settings['btn_text'] ?></span>
+				</span>	
+			</a> -->
+			<?php 
+			// var_dump(wc_get_product()->get_type());
 
-		$atc_html .= '<div class="uael-woo-add-to-cart uael-product-<?php echo esc_attr( $product ); ?>">';
-
+				 function woocommerce_template_single_add_to_cart() {
+	        
+	       			 do_action( 'woocommerce_' . $product->get_type() . '_add_to_cart' );
+	    	}
+			?>
+		</div>
+		<?php
+/*		$atc_html .= '<div class="uael-woo-add-to-cart">';
 		$atc_html .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>';
 		$atc_html .= '<span class="hfe-atc-content-wrapper">';
 
@@ -476,9 +500,8 @@ class Add_To_Cart extends Widget_Base {
 		$atc_html .= '</div>';
 
 		echo $atc_html; 
+*/		
 
 	}
-
-
 
 }
