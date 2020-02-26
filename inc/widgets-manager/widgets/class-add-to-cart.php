@@ -138,7 +138,7 @@ class Add_To_Cart extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		/*$this->add_control(
 			'btn_text',
 			array(
 				'label'   => __( 'Text', 'header-footer-elementor' ),
@@ -148,7 +148,7 @@ class Add_To_Cart extends Widget_Base {
 					'active' => true,
 				),
 			)
-		);
+		);*/
 
 		$this->add_responsive_control(
 			'align',
@@ -178,7 +178,7 @@ class Add_To_Cart extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		/*$this->add_control(
 			'btn_size',
 			array(
 				'label' => __( 'Size', 'header-footer-elementor' ),
@@ -186,7 +186,7 @@ class Add_To_Cart extends Widget_Base {
 				'default' => 'sm',
 				'options' => self::get_button_sizes(),
 			)
-		);
+		);*/
 
 		$this->add_responsive_control(
 			'btn_padding',
@@ -200,7 +200,7 @@ class Add_To_Cart extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		/*$this->add_control(
 			'new_btn_icon',
 			array(
 				'label'            => __( 'Icon', 'header-footer-elementor' ),
@@ -212,8 +212,8 @@ class Add_To_Cart extends Widget_Base {
 				),
 			)
 		);
-
-		$this->add_control(
+*/
+		/*$this->add_control(
 			'btn_icon_align',
 			array(
 				'label'      => __( 'Icon Position', 'header-footer-elementor' ),
@@ -225,9 +225,9 @@ class Add_To_Cart extends Widget_Base {
 				),
 
 			)
-		);
+		);*/
 
-		$this->add_control(
+		/*$this->add_control(
 			'btn_icon_indent',
 			array(
 				'label'      => __( 'Icon Spacing', 'header-footer-elementor' ),
@@ -242,7 +242,7 @@ class Add_To_Cart extends Widget_Base {
 					'{{WRAPPER}} .elementor-align-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
 				),
 			)
-		);
+		);*/
 		$this->end_controls_section();
 	}
 	/**
@@ -407,15 +407,7 @@ class Add_To_Cart extends Widget_Base {
 
 	}
 
-	public function render_product(){
-		// global $product;
-		/*$product = '';
-		if( is_product() ) {*/
-			// $product_id   = $product->get_id();
-			// $product = wc_get_product();
-		/*}
-			return $product;*/
-			// var_dump($product);  
+	public function render_product(){ 
 	}
 
 
