@@ -4,8 +4,8 @@
  *
  * @package Header Footer Elementor
  */
-namespace HFE\WidgetsManager\Widgets;
 
+namespace HFE\WidgetsManager\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
@@ -14,9 +14,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Scheme_Color;
 use Elementor\Widget_Button;
-
 use Elementor\Group_Control_Background;
-
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,22 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Add to Cart.
  */
-
 class Add_To_Cart extends Widget_Base {
 
-	/**
-	 * Module should load or not.
-	 *
-	 * @since 0.0.1
-	 * @access public
-	 *
-	 * @return bool true|false.
-	 */
-	/*public static function is_enable() {
-		if( ! class_exists( 'woocommerce' ) ){
-			return false;
-		} 
-	}*/
 	/**
 	 * Retrieve the widget name.
 	 *
@@ -119,300 +103,217 @@ class Add_To_Cart extends Widget_Base {
 	protected function _register_controls() {
 		/* Button Control */
 		$this->register_content_button_controls();
-		/* Button Style */
-		$this->register_style_button_controls();
 	}
 
 	/**
 	 * Register Content Button Controls.
 	 *
-	 * @since 0.0.1
+	 * @since x.x.x
 	 * @access protected
 	 */
 	protected function register_content_button_controls() {
 		$this->start_controls_section(
 			'section_button_field',
-			array(
+			[
 				'label' => __( 'Button', 'header-footer-elementor' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
+			]
 		);
-
-		/*$this->add_control(
-			'btn_text',
-			array(
-				'label'   => __( 'Text', 'header-footer-elementor' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Add to cart', 'header-footer-elementor' ),
-				'dynamic' => array(
-					'active' => true,
-				),
-			)
-		);*/
 
 		$this->add_responsive_control(
 			'align',
-			array(
+			[
 				'label'        => __( 'Alignment', 'header-footer-elementor' ),
 				'type'         => Controls_Manager::CHOOSE,
-				'options'      => array(
-					'left'    => array(
+				'options'      => [
+					'left'    => [
 						'title' => __( 'Left', 'header-footer-elementor' ),
 						'icon'  => 'fa fa-align-left',
-					),
-					'center'  => array(
+					],
+					'center'  => [
 						'title' => __( 'Center', 'header-footer-elementor' ),
 						'icon'  => 'fa fa-align-center',
-					),
-					'right'   => array(
+					],
+					'right'   => [
 						'title' => __( 'Right', 'header-footer-elementor' ),
 						'icon'  => 'fa fa-align-right',
-					),
-					'justify' => array(
+					],
+					'justify' => [
 						'title' => __( 'Justified', 'header-footer-elementor' ),
 						'icon'  => 'fa fa-align-justify',
-					),
-				),
+					],
+				],
 				'prefix_class' => 'hfe-add-to-cart%s-align-',
 				'default'      => 'left',
-			)
+			]
 		);
-
-		/*$this->add_control(
-			'btn_size',
-			array(
-				'label' => __( 'Size', 'header-footer-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'sm',
-				'options' => self::get_button_sizes(),
-			)
-		);*/
 
 		$this->add_responsive_control(
 			'btn_padding',
-			array(
+			[
 				'label'      => __( 'Padding', 'header-footer-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'selectors'  => array(
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
 					'{{WRAPPER}} .cart button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
+				],
+			]
 		);
 
-		/*$this->add_control(
-			'new_btn_icon',
-			array(
-				'label'            => __( 'Icon', 'header-footer-elementor' ),
-				'type'             => Controls_Manager::ICONS,
-				'fa4compatibility' => 'btn_icon',
-				'default'          => array(
-					'value'   => 'fa fa-shopping-cart',
-					'library' => 'fa-solid',
-				),
-			)
-		);
-*/
-		/*$this->add_control(
-			'btn_icon_align',
-			array(
-				'label'      => __( 'Icon Position', 'header-footer-elementor' ),
-				'type'       => Controls_Manager::SELECT,
-				'default'    => 'left',
-				'options'    => array(
-					'left'  => __( 'Before', 'header-footer-elementor' ),
-					'right' => __( 'After', 'header-footer-elementor' ),
-				),
-
-			)
-		);*/
-
-		/*$this->add_control(
-			'btn_icon_indent',
-			array(
-				'label'      => __( 'Icon Spacing', 'header-footer-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'range'      => array(
-					'px' => array(
-						'max' => 50,
-					),
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .elementor-align-icon-right' => 'margin-left: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .elementor-align-icon-left' => 'margin-right: {{SIZE}}{{UNIT}};',
-				),
-			)
-		);*/
-		$this->end_controls_section();
-	}
-	/**
-	 * Register Style Button Controls.
-	 *
-	 * @since x.x.x
-	 * @access protected
-	 */
-	protected function register_style_button_controls() {
-
-		$this->start_controls_section(
-			'section_design_button',
-			array(
-				'label' => __( 'Button', 'header-footer-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-
+		/**
+		 * Register Style Button Controls.
+		 *
+		 * @since x.x.x
+		 * @access protected
+		 */
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
-			array(
+			[
 				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .cart button',
 				'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
-			)
+			]
 		);
 
 		$this->start_controls_tabs( 'button_tabs_style' );
 
 		$this->start_controls_tab(
 			'button_normal',
-			array(
+			[
 				'label' => __( 'Normal', 'header-footer-elementor' ),
-			)
+			]
 		);
 
 		$this->add_control(
 			'button_color',
-			array(
+			[
 				'label'     => __( 'Text Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
+				'selectors' => [
 					'{{WRAPPER}} .cart button ' => 'color: {{VALUE}};',
-				),
-			)
+				],
+			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			array(
+			[
 				'name'           => 'button_background_color',
 				'label'          => __( 'Background Color', 'header-footer-elementor' ),
-				'types'          => array( 'classic', 'gradient' ),
+				'types'          => [ 'classic', 'gradient' ],
 				'selector'       => '{{WRAPPER}} .cart button',
-				'fields_options' => array(
-					'color' => array(
-						'scheme' => array(
+				'fields_options' => [
+					'color' => [
+						'scheme' => [
 							'type'  => Scheme_Color::get_type(),
 							'value' => Scheme_Color::COLOR_4,
-						),
-					),
-				),
-			)
+						],
+					],
+				],
+			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			array(
+			[
 				'name'        => 'button_border',
 				'placeholder' => '',
 				'default'     => '',
 				'selector'    => '{{WRAPPER}} .cart button',
-			)
+			]
 		);
 
 		$this->add_control(
 			'border_radius',
-			array(
+			[
 				'label'      => __( 'Border Radius', 'header-footer-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
 					'{{WRAPPER}} .cart button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
+				],
+			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			array(
+			[
 				'name'     => 'button_box_shadow',
 				'selector' => '{{WRAPPER}} .cart button',
-			)
+			]
 		);
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
 			'button_hover',
-			array(
+			[
 				'label' => __( 'Hover', 'header-footer-elementor' ),
-			)
+			]
 		);
-
 
 		$this->add_control(
 			'button_hover_color',
-			array(
+			[
 				'label'     => __( 'Text Hover Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
+				'selectors' => [
 					'{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover' => 'color: {{VALUE}};',
-				),
-			)
+				],
+			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			array(
+			[
 				'name'           => 'button_background_hover_color',
 				'label'          => __( 'Background Color', 'header-footer-elementor' ),
-				'types'          => array( 'classic', 'gradient' ),
+				'types'          => [ 'classic', 'gradient' ],
 				'selector'       => '{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover',
-				'fields_options' => array(
-					'color' => array(
-						'scheme' => array(
+				'fields_options' => [
+					'color' => [
+						'scheme' => [
 							'type'  => Scheme_Color::get_type(),
 							'value' => Scheme_Color::COLOR_4,
-						),
-					),
-				),
-			)
+						],
+					],
+				],
+			]
 		);
 
 		$this->add_control(
 			'button_border_hover_color',
-			array(
+			[
 				'label'     => __( 'Border Hover Color', 'header-footer-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
+				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_4,
-				),
-				'condition' => array(
+				],
+				'condition' => [
 					'button_border_border!' => '',
-				),
-				'selectors' => array(
+				],
+				'selectors' => [
 					'{{WRAPPER}} .cart button:focus, {{WRAPPER}} .cart button:hover' => 'border-color: {{VALUE}};',
-				),
-			)
+				],
+			]
 		);
 
 		$this->add_control(
 			'hover_animation',
-			array(
+			[
 				'label' => __( 'Hover Animation', 'header-footer-elementor' ),
 				'type'  => Controls_Manager::HOVER_ANIMATION,
-			)
+			]
 		);
 
 		$this->end_controls_tab();
+		$this->end_controls_section();
 
 	}
-
-	public function render_product(){ 
-	}
-
 
 	/**
-	 * Render Woo Product Grid output on the frontend.
+	 * Render Add to cart output on the frontend.
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
@@ -420,80 +321,20 @@ class Add_To_Cart extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		
+
 		global $product;
 		$product = wc_get_product();
-		
+
 		if ( empty( $product ) ) {
 			return;
 		}
-	
-		$settings = $this->get_settings_for_display();
-		$atc_html = '';
-		// $product  = false;
-
-/*		$class = array(
-				'cart button',
-				'elementor-button',
-				'elementor-animation-' . $settings['hover_animation'],
-				'elementor-size-' . $settings['btn_size'],
-			);
-*/
-		$this->add_render_attribute(
-			'button',
-			array(
-				'rel'             => 'nofollow',
-				// 'class'           => $class,
-			)
-		);
-
-		$this->add_render_attribute(
-			'icon-align',
-			'class',
-			array(
-				'hfe-atc-icon-align',
-				'elementor-align-icon-' . $settings['btn_icon_align'],
-			)
-		);
+		// $settings = $this->get_settings_for_display();
 		?>
 
 		<div class="hfe-woo-atc hfe-product-<?php echo esc_attr( wc_get_product()->get_type() ); ?>">
 			<?php woocommerce_template_single_add_to_cart(); ?>
-			<!-- <a <?php echo $this->get_render_attribute_string( 'button' ); ?>>
-				<span class="hfe-atc-content-wrapper">
-					<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
-						<i class="<?php echo $settings['new_btn_icon']['value'] ?>" aria-hidden="true"></i>
-					</span>
-					<span class="uael-atc-btn-text"><?php echo $settings['btn_text'] ?></span>
-				</span>	
-			</a> -->
-			<?php 
-			// var_dump(wc_get_product()->get_type());
-
-				 function woocommerce_template_single_add_to_cart() {
-	        
-	       			 do_action( 'woocommerce_' . $product->get_type() . '_add_to_cart' );
-	    	}
-			?>
 		</div>
 		<?php
-/*		$atc_html .= '<div class="uael-woo-add-to-cart">';
-		$atc_html .= '<a ' . $this->get_render_attribute_string( 'button' ) . '>';
-		$atc_html .= '<span class="hfe-atc-content-wrapper">';
-
-		$atc_html .= '<span ' . $this->get_render_attribute_string( 'icon-align' ) . '">';
-		$atc_html .=  '<i class="' . $settings['new_btn_icon']['value'] . '" aria-hidden="true"></i>';
-		$atc_html .= '</span>';
-
-
-		$atc_html .= '<span class="uael-atc-btn-text">' . $settings['btn_text'] . '</span>';
-		$atc_html .= '</span>';
-		$atc_html .= '</a>';
-		$atc_html .= '</div>';
-
-		echo $atc_html; 
-*/		
-
 	}
 
 }
